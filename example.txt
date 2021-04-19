@@ -1,0 +1,6 @@
+http://localhost:8080/register?name=Boris&login=borik&password=12345
+http://localhost:8080/authorization?login=borik&password=12345
+http://localhost:8080/logout
+
+http://localhost:8080/operation?num1=10&num2=5&method=multiply
+http://localhost:8080/history

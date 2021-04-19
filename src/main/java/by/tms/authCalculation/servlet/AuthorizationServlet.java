@@ -4,6 +4,7 @@ import by.tms.authCalculation.entity.User;
 import by.tms.authCalculation.exception.ParametersNotPassedException;
 import by.tms.authCalculation.exception.UserNotFoundException;
 import by.tms.authCalculation.servise.UserService;
+import by.tms.authCalculation.util.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class AuthorizationServlet extends HttpServlet {
             String password = req.getParameter("password");
 
             try {
-                User userAuth = userService.getUser(login, password);
+                User userAuth = userService.getUser(Validation.authorization(login, password));
                 resp.getWriter().println("Вы успешно аторизовались");
                 req.getSession().setAttribute("user", userAuth);
             } catch (UserNotFoundException e) {

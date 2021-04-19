@@ -31,7 +31,7 @@ public class OperationServlet extends HttpServlet {
             String method = req.getParameter("method");
 
             try {
-                Operation operation = Validation.operationValidation(num1, num2, method);
+                Operation operation = Validation.operation(num1, num2, method);
                 operation.setUser((User) user);
                 operationService.addOperation(operation);
                 resp.getWriter().format("Результат: %f", operation.result());

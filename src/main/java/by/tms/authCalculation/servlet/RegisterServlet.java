@@ -4,6 +4,7 @@ import by.tms.authCalculation.entity.User;
 import by.tms.authCalculation.exception.LoginIsBusy;
 import by.tms.authCalculation.exception.ParametersNotPassedException;
 import by.tms.authCalculation.servise.UserService;
+import by.tms.authCalculation.util.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +26,8 @@ public class RegisterServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        User user = new User(name, login, password);
         try {
+            User user = Validation.register(name, login, password);
             userService.addUser(user);
             resp.getWriter().println("Аккаунт успешно зарегестрирован");
         } catch (ParametersNotPassedException e) {

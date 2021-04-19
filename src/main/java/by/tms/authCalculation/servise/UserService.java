@@ -10,10 +10,7 @@ import by.tms.authCalculation.exception.UserNotFoundException;
 public class UserService {
     private DAO dao = InMemoryDAO.getInstance();
 
-    public void addUser(User user) throws ParametersNotPassedException, LoginIsBusy {
-        if(user.getName() == null || user.getLogin() == null || user.getPassword() == null) {
-            throw new ParametersNotPassedException();
-        }
+    public void addUser(User user) throws LoginIsBusy {
 
         try {
             dao.getUserByLogin(user.getLogin());
@@ -23,14 +20,11 @@ public class UserService {
         }
     }
 
-    public User getUser(String login, String password) throws UserNotFoundException, ParametersNotPassedException {
-        if(login == null || password == null) {
-            throw new ParametersNotPassedException();
-        }
+    public User getUser(User user) throws UserNotFoundException, ParametersNotPassedException {
 
-        User userByLogin = dao.getUserByLogin(login);
+        User userByLogin = dao.getUserByLogin(user.getLogin());
 
-        if(userByLogin.getPassword().equals(password)) {
+        if(userByLogin.getPassword().equals(user.getPassword())) {
             return userByLogin;
         }
         throw new UserNotFoundException();

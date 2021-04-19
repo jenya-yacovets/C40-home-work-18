@@ -10,28 +10,33 @@ public class Validation {
         if(name == null || login == null || password == null) {
             throw new ParametersNotPassedException();
         }
-        return new User(name, login, password);
+        return new User(name.trim(), login.trim(), password);
     }
 
     public static User authorization(String login, String password) throws ParametersNotPassedException {
         if(login == null || password == null) {
             throw new ParametersNotPassedException();
         }
-        return new User(login, password);
+        return new User(login.trim(), password);
     }
 
     public static Operation operation(String num1, String num2, String method) throws ParametersNotPassedException {
+
+        if(num1 == null || num2 == null || method == null) {
+            throw new ParametersNotPassedException();
+        }
+
         Operation operation = new Operation();
 
         try {
-            operation.setNum1(Double.parseDouble(num1));
-            operation.setNum2(Double.parseDouble(num2));
+            operation.setNum1(Double.parseDouble(num1.trim()));
+            operation.setNum2(Double.parseDouble(num2.trim()));
         } catch(NullPointerException e) {
             throw new ParametersNotPassedException();
         }
 
         for(OperationEnum item : OperationEnum.values()) {
-            if(item.getNameParam().equals(method)) {
+            if(item.getNameParam().equals(method.trim())) {
                 operation.setOperation(item);
                 break;
             }

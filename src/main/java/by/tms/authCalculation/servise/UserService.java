@@ -14,7 +14,7 @@ public class UserService {
 
         try {
             dao.getUserByLogin(user.getLogin());
-            throw new LoginIsBusy();
+            throw new LoginIsBusy(user.getLogin());
         } catch (UserNotFoundException e) {
             dao.createUser(user);
         }

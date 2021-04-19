@@ -18,4 +18,12 @@ public class ParametersNotPassedException extends Exception{
             return "Parameters not passed";
         }
     }
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
 }
